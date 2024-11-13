@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out, backgroundAnimation 10s ease-in-out infinite;
 }
 
 @keyframes fadeIn {
@@ -25,6 +25,18 @@ body {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background-color: var(--background-color);
+    }
+    50% {
+        background-color: #e0e0e0;
+    }
+    100% {
+        background-color: var(--background-color);
     }
 }
 
