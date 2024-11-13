@@ -4,102 +4,184 @@
     <meta charset="UTF-8">
     <title>Text Encryption/Decryption Tool</title>
     <style>
-        body {
-            background: linear-gradient(45deg, #0c1016, #1a1f2c, #2a2f42);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            background-color:0FA4aF;
-            color: 0FA4aF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .input-group {
-            background-color: 244855;
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        .buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-        .encrypt-btn {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .decrypt-btn {
-            background-color: #2196F3;
-            color: white;
-        }
-        .copy-btn {
-            background-color: #9c27b0;
-            color: white;
-        }
-        button:hover {
-            opacity: 0.9;
-        }
-        .result-container {
-            position: relative;
-            margin-top: 15px;
-        }
-        #result {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            min-height: 50px;
-            margin-bottom: 10px;
-            word-wrap: break-word;
-        }
-        .copy-feedback {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            display: none;
-            animation: fadeInOut 2s ease-in-out;
-        }
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+        /* Warm color palette */
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #ffa500;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeInDown 0.5s ease-in-out;
+}
+
+@keyframes fadeInDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #e53935;
+}
+
+.copy-btn {
+    background-color: var(--secondary-color);
+}
+
+.copy-btn:hover {
+    background-color: #f57c00;
+}
+
+.result-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+#result {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    min-height: 50px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.copy-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
     </style>
 </head>
 <body>
