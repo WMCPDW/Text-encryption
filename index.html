@@ -37,6 +37,68 @@
 
     <script>
         // Your existing JavaScript code goes here
+        function encrypt() {
+            const text = document.getElementById('text').value;
+            const key = document.getElementById('key').value;
+            
+            if (!text || !key) {
+                alert('Please enter both text and key');
+                return;
+            }
+            
+            let encrypted = '';
+            for (let i = 0; i < text.length; i++) {
+                const charCode = text.charCodeAt(i);
+                const keyChar = key.charCodeAt(i % key.length);
+                encrypted += String.fromCharCode(charCode ^ keyChar);
+            }
+            
+            document.getElementById('result').textContent = btoa(encrypted);
+        }
+        
+        function decrypt() {
+            const text = document.getElementById('text').value;
+            const key = document.getElementById('key').value;
+            
+            if (!text || !key) {
+                alert('Please enter both text and key');
+                return;
+            }
+            
+            try {
+                const decoded = atob(text);
+                let decrypted = '';
+                
+                for (let i = 0; i < decoded.length; i++) {
+                    const charCode = decoded.charCodeAt(i);
+                    const keyChar = key.charCodeAt(i % key.length);
+                    decrypted += String.fromCharCode(charCode ^ keyChar);
+                }
+                
+                document.getElementById('result').textContent = decrypted;
+            } catch (e) {
+                alert('Invalid encrypted text format');
+            }
+        }
+
+        function copyResult() {
+            const result = document.getElementById('result').textContent;
+            if (result) {
+                navigator.clipboard.writeText(result).then(() => {
+                    showCopyFeedback();
+                }).catch(err => {
+                    alert('Failed to copy text: ' + err);
+                });
+            }
+        }
+
+        function showCopyFeedback() {
+            const feedback = document.getElementById('copyFeedback');
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 2000);
+        }
     </script>
 </body>
 </html>
