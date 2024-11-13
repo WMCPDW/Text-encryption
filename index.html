@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Encryption/Decryption Tool</title>
+    <link rel="stylesheet" href="encryption-styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Encryption/Decryption Tool</h1>
+        
+        <div class="input-group">
+            <label for="key">Encryption Key:</label>
+            <input type="text" id="key" placeholder="Enter your encryption key" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="text">Text:</label>
+            <textarea id="text" placeholder="Enter text to encrypt or decrypt" required></textarea>
+        </div>
+        
+        <div class="buttons">
+            <button onclick="encrypt()" class="encrypt-btn">Encrypt</button>
+            <button onclick="decrypt()" class="decrypt-btn">Decrypt</button>
+        </div>
+        
+        <div class="input-group">
+            <label>Result:</label>
+            <div class="result-container">
+                <div id="result"></div>
+                <button onclick="copyResult()" class="copy-btn">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
 
+    <div id="copyFeedback" class="copy-feedback">Copied to clipboard!</div>
+
+    <script>
+        // Your existing JavaScript code goes here
+    </script>
+</body>
+</html>
